@@ -109,8 +109,13 @@ app.get("/", (req: Request, res: Response) => {
     res.status(200).json({ messege: "Elansol" });
 })
 
-app.listen(PORT, () => {
-  console.log("app is listening on port " + PORT);
-});
+if (process.env.NODE_ENV !== "production") {
+  const port = process.env.PORT || 3000;
+  app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+  });
+}
 
 if (MONGO) mongoose.connect(MONGO);
+
+export default app;

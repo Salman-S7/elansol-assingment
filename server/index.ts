@@ -5,6 +5,7 @@ import bcrypt from 'bcrypt';
 import mongoose from "mongoose";
 import { User } from "./src/db";
 import jwt from "jsonwebtoken";
+import { error } from "console";
 
 const app: Express = express();
 
@@ -60,8 +61,37 @@ app.post("/signup", async (req: Request, res: Response) => {
     }
 })
 
-app.get('login', (req: Request, res: Response) => {
-    
+app.post('/login', async (req: Request, res: Response) => {
+    try {
+        const { email, password } = req.body;
+
+        if (!email || !password) {
+            return res.status(400).json({ error: "All fields are required" });
+        }
+        const user = await User.findOne({ email });
+
+        if (!user || !user.password) {
+            return res.status(400).json({ error: "Invalid credentials" });
+        }
+        
+        const isPasswordMatch = await bcrypt.compare(password, user.password);
+
+        if (!isPasswordMatch) {
+            return res.status(400).json({ error: "Invalid credentials" });
+        }
+
+        if (!JWT_SECRET) {
+            throw new Error("No jwt secret found");
+        }
+
+        const jwtToken = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
+        res.status(200).json({messege : "Login succesfull", jwtToken})
+
+    } catch (error) {
+        console.error("Login error:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+
 })
 
 app.listen(PORT, () => {

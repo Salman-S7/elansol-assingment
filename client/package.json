@@ -16,8 +16,10 @@
     "clsx": "^2.1.1",
     "framer-motion": "^11.2.12",
     "react": "^18.3.1",
+    "react-data-table-component": "^7.6.2",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.24.0",
+    "styled-components": "^6.1.11",
     "tailwind-merge": "^2.3.0"
   },
   "devDependencies": {

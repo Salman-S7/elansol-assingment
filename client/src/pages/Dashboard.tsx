@@ -9,7 +9,7 @@ import axios from "axios";
 const Dashboard = () => {
     const { checkIsAuthenticated } = useAuth();
   const navigate = useNavigate();
-  const [usersData, setUsersData] = useState();
+  const [usersData, setUsersData] = useState([]);
 
   useEffect(() => {
     const getData = async () => {

@@ -25,12 +25,35 @@ export const useLogin = (): {
         password,
       });
       if (response.status === 200) {
-        console.log("login succesfull");
         login(response.data.jwtToken);
-        navigate('/')
+        navigate('/');
       }
-      console.log(response.data);
+      
     } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          switch (error.response.status) {
+            case 400:
+              alert("Provide all credentials");
+              break;
+            case 401:
+              alert("Invalid credentials");
+              break;
+            case 500:
+              alert("Internal server error");
+              break;
+            default:
+              alert("Error please try again");
+          }
+        } else if (error.request) {
+          alert("No response received from server");
+        } else {
+          alert("Unepected error happened, try again");
+        }
+      } else {
+        alert("Network error. Please try again later.");
+        
+      }
       console.error(error);
     } finally {
       setIsLoading(false);

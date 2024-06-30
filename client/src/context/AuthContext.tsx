@@ -1,4 +1,5 @@
 import { FC, ReactNode, createContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export interface AuthContextType {
   isAuthenticated: boolean;
@@ -15,7 +16,6 @@ interface AuthProviderProps {
 
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-
 
   const checkIsAuthenticated = () => {
     const token = localStorage.getItem("token")

@@ -68,14 +68,14 @@ app.post("/login", async (req, res) => {
     }
     const user = await User.findOne({ email });
 
-    if (!user || !user.password) {
-      return res.status(400).json({ error: "Invalid credentials" });
+    if (!user) {
+      return res.status(401).json({ error: "Invalid credentials" });
     }
 
     const isPasswordMatch = await bcrypt.compare(password, user.password);
 
     if (!isPasswordMatch) {
-      return res.status(400).json({ error: "Invalid credentials" });
+      return res.status(401).json({ error: "Invalid credentials" });
     }
 
     if (!JWT_SECRET) {

@@ -1,5 +1,4 @@
 import { FC, ReactNode, createContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 export interface AuthContextType {
   isAuthenticated: boolean;

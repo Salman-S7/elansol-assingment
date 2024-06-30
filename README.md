@@ -45,17 +45,3 @@ This project implements a full-stack user registration and login system using Ex
 2. Go to the server and client and install the dependencies
 3. Add the required env variables
 4. start the front end and backend
-<!--
-// test user
- {
-  "userName": "salman",
-  "dob" : "12/12/2012",
-  "password": "123123",
-  "email": "salman@gmail.com"
-}
- -->
-
- <!-- lBR9HEw6RNMr9ZxQ -->
- <!-- sammyzed1505 -->
- <!-- const uri = "mongodb+srv://sammyzed1505:lBR9HEw6RNMr9ZxQ@cluster0.ms8dyhf.mongodb.net/?appName=Cluster0";
- -->

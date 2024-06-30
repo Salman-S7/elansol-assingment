@@ -3,14 +3,15 @@ import { useAuth } from "../hooks/useAuth"
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-    const { isAuthenticated } = useAuth();
+    const { checkIsAuthenticated } = useAuth();
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (!isAuthenticated) {
-            navigate("/login");
-        }
-    })
+  useEffect(() => {
+    const authenticated = checkIsAuthenticated();
+    if (!authenticated) {
+      navigate('/login');
+    }
+  },[])
 
   return (
     <div>Dashboard</div>
